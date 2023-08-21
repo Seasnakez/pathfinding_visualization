@@ -13,6 +13,9 @@ class ObstacleGrid:
     def adjacent(self, include_obstacles=True):
         pass
 
+    def change_color(self, row, column, color):
+        self.color_map[row][column] = color
+
     def toggle_obstacle(self, row, column):
         if self.obstacle_map[row][column] == 0:
             self.obstacle_map[row][column] = 1
@@ -22,6 +25,8 @@ class ObstacleGrid:
             self.color_map[row][column] = pg.Color("white")
         
     def world_to_grid(self, x, y):
+        if y > self.height * self.cell_height or x > self.width * self.cell_width:
+            return None
         return (y // self.cell_height, x // self.cell_width)
 
     def grid_to_world(self, row, column):
