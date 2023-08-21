@@ -10,7 +10,7 @@ class ObstacleGrid:
         self.height = height
         self.width = width
 
-    def adjacent(self, row, column, include_obstacles=True):
+    def adjacent(self, row, column, include_obstacles=False):
         adjacent_list = []
         # Top left
         if row-1 >= 0 and column-1 >= 0:
