@@ -10,8 +10,41 @@ class ObstacleGrid:
         self.height = height
         self.width = width
 
-    def adjacent(self, include_obstacles=True):
-        pass
+    def adjacent(self, row, column, include_obstacles=True):
+        adjacent_list = []
+        # Top left
+        if row-1 >= 0 and column-1 >= 0:
+            adjacent_list.append((row-1, column-1))
+        # Top middle
+        if row-1 >= 0:
+            adjacent_list.append((row-1, column))
+        # Top right
+        if row-1 >= 0 and column+1 <= self.width-1:
+            adjacent_list.append((row-1, column+1))
+        # Right
+        if column-1 >= 0:
+            adjacent_list.append((row, column-1))
+        # Left
+        if column+1 <= self.width-1:
+            adjacent_list.append((row, column+1))
+        # Bottom left
+        if row+1 <= self.height-1 and column-1 >= 0:
+            adjacent_list.append((row+1, column-1))
+        # Bottom middle
+        if row+1 <= self.height-1:
+            adjacent_list.append((row+1, column))
+        # Bottom rights
+        if row+1 <= self.height-1 and column+1 <= self.width-1:
+            adjacent_list.append((row+1, column+1))
+
+
+        if not include_obstacles:
+            temp = []
+            for row, column in adjacent_list:
+                if not self.obstacle_map[row][column]:
+                    temp.append((row, column))
+            adjacent_list = temp
+        return adjacent_list
 
     def change_color(self, row, column, color):
         self.color_map[row][column] = color
