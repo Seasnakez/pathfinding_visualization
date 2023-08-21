@@ -5,13 +5,13 @@ import pygame as pg
 class AStarVisualizer:
     def __init__(self, render):
         self.render = render
-        self.a_star = AStar()
         self.grid = ObstacleGrid(render, 9, 16, 100, 100)
-
+        self.goal = (self.grid.height-1, self.grid.width-1)
+        self.grid.change_color(*self.goal, pg.Color("green"))
+        self.start = (0, 0)
+        self.grid.change_color(*self.start, pg.Color("black"))
+        self.a_star = AStar(self.start, self.goal)
         self.running_simulation = False
-
-        # Adds obstacles
-        self.grid.toggle_obstacle(0, 1)
 
     def run_simulation(self):
         if self.run_simulation == True:
@@ -20,6 +20,8 @@ class AStarVisualizer:
 
     
     def step(self):
+        if not self.running_simulation:
+            return
         pass
         """
         frontier ... = self.a_star.step()
@@ -36,6 +38,8 @@ class AStarVisualizer:
             return
         grid_position = self.grid.world_to_grid(*position)
         if grid_position == None:
+            return
+        if grid_position == self.start or grid_position == self.goal:
             return
         self.grid.toggle_obstacle(*grid_position)
 
