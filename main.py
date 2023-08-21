@@ -1,6 +1,5 @@
 from ObstacleGrid import *
 from AStarVisualizer import *
-from AStar import *
 import pygame as pg
 
 class SoftwareRenderer:
