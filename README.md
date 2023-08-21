@@ -1,3 +1,3 @@
 # pathfinding_visualization
 
-![Showcase](https://github.com/Seasnakez/pathfinding_visualization/showcase.gif)
+![Showcase](https://github.com/Seasnakez/pathfinding_visualization/blob/test/showcase.gif)
