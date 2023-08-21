@@ -12,18 +12,13 @@ class SoftwareRenderer:
         self.screen = pg.display.set_mode(self.RES)
         self.clock = pg.time.Clock()
 
-        self.a_star = AStar()
-        self.grid = ObstacleGrid(3, 5, 100, 100)
-        self.a_star_visualizer = AStarVisualizer(self, self.a_star, self.grid)
+        self.a_star_visualizer = AStarVisualizer(self)
 
     def draw(self):
         self.screen.fill(pg.Color("darkslategray"))
         self.a_star_visualizer.draw()
 
     def run(self):
-        # Adds obstacles
-        self.grid.toggle_obstacle(0, 1)
-
         while True:
             self.draw()
             [exit() for i in pg.event.get() if i.type == pg.QUIT]
