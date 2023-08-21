@@ -20,8 +20,16 @@ class SoftwareRenderer:
 
     def run(self):
         while True:
+            events = pg.event.get()
+            for event in events:
+                if event.type == pg.QUIT: 
+                    exit()
+                if event.type == pg.MOUSEBUTTONUP:
+                    self.a_star_visualizer.mouse_pressed(pg.mouse.get_pos())
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_RETURN:
+                        self.a_star_visualizer.run_simulation()
             self.draw()
-            [exit() for i in pg.event.get() if i.type == pg.QUIT]
             pg.display.set_caption(str(self.clock.get_fps()))
             pg.display.flip()
             self.clock.tick(self.FPS)
