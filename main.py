@@ -28,6 +28,8 @@ class SoftwareRenderer:
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_RETURN:
                         self.a_star_visualizer.run_simulation()
+                    if event.key == pg.K_SPACE:
+                        self.a_star_visualizer.reset_colors()
             self.draw()
             pg.display.set_caption(str(self.clock.get_fps()))
             pg.display.flip()
