@@ -23,7 +23,7 @@ class SoftwareRenderer:
             for event in events:
                 if event.type == pg.QUIT: 
                     exit()
-                if event.type == pg.MOUSEBUTTONUP:
+                if pg.mouse.get_pressed()[0]:
                     self.a_star_visualizer.mouse_pressed(pg.mouse.get_pos())
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_RETURN:

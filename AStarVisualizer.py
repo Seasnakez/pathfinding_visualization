@@ -10,6 +10,7 @@ class AStarVisualizer:
         self.start = (0, 0)
         self.reset_colors()
         self.running_simulation = False
+        self.last_grid_position = self.start
 
     def reset_colors(self):
         if self.run_simulation == True:
@@ -45,11 +46,14 @@ class AStarVisualizer:
         if self.running_simulation:
             return
         grid_position = self.grid.world_to_grid(*position)
-        if grid_position == None:
-            return
-        if grid_position == self.start or grid_position == self.goal:
-            return
-        self.grid.toggle_obstacle(*grid_position)
+        if self.last_grid_position != grid_position:
+            if grid_position == None:
+                return
+            self.last_grid_position = grid_position
+            if grid_position == self.start or grid_position == self.goal:
+                return
+            self.grid.toggle_obstacle(*grid_position)
+
 
     def draw(self):
         if self.running_simulation:
