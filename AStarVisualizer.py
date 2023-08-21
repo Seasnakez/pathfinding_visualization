@@ -7,15 +7,22 @@ class AStarVisualizer:
         self.render = render
         self.grid = ObstacleGrid(render, 9, 16, 100, 100)
         self.goal = (self.grid.height-1, self.grid.width-1)
-        self.grid.change_color(*self.goal, pg.Color("green"))
         self.start = (0, 0)
-        self.grid.change_color(*self.start, pg.Color("black"))
+        self.reset_colors()
         self.running_simulation = False
+
+    def reset_colors(self):
+        if self.run_simulation == True:
+            return
+        self.grid.reset_colors()
+        self.grid.change_color(*self.goal, pg.Color("green"))
+        self.grid.change_color(*self.start, pg.Color("black"))
 
     def run_simulation(self):
         if self.run_simulation == True:
             return
         self.running_simulation = True
+        self.reset_colors()
         self.a_star = AStar(self.start, self.goal, self.grid.adjacent)
 
     def step(self):
@@ -28,25 +35,11 @@ class AStarVisualizer:
                 self.grid.change_color(*position, pg.Color("aquamarine4"))
 
         if path:
-            self.grid.reset_colors()
-            self.grid.change_color(*self.goal, pg.Color("green"))
-            self.grid.change_color(*self.start, pg.Color("black"))
             for position in path:
                 if position != self.start and position != self.goal:
                     self.grid.change_color(*position, pg.Color("lightgreen"))
             print("finished")
             self.running_simulation = False
-        """
-        frontier ... = self.a_star.step()
-        for row, column in frontier:
-            grid.update_color(row, column, color.yellow)
-        etc for each list
-
-        """
-        
-        # Update color map according to step output
-
-
 
     def mouse_pressed(self, position):
         if self.running_simulation:
